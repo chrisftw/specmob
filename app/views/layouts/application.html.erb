@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/favicon.ico" />
+</head>
+<body>
+  <%= render "layouts/navigation"%>
+
+  <%= yield %>
+</div>
+<footer style="margin-top: 30px">
+  <div class="container" style="background-color: lightgray;">
+  <h4 style="text-align: center; color: gray;"> © 2012 Specmob. All Rights Reserved. <%= link_to "Terms and Conditions", terms_path %></h4>
+  </footer>
+</body>
+</html>

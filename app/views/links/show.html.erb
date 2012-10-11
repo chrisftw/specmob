@@ -1,0 +1,14 @@
+
+<h2>Comments:</h2>
+<div>
+  <% @link.comments.each do |comment| %>
+    <p>- <%= comment.message.html_safe %></p>
+  <% end %>
+</div>
+
+<%= simple_form_for(@comment) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :message, :placeholder => 'Add a comment' %>
+  <%= f.button :submit %>
+  <%= f.hidden_field :link_id, :value => @link.id %>
+<% end %>
