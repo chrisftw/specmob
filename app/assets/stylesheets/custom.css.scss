@@ -98,6 +98,15 @@ i.not-starred {
   box-shadow: inset 0px 1px 1px 1px rgba(0, 0, 0, .25);
 }
 
+.whitebox {
+	padding: 10px 10px 10px 10px;
+	background-color: white;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0px 1px 1px 1px rgba(0, 0, 0, .25);
+  box-shadow: inset 0px 1px 1px 1px rgba(0, 0, 0, .25);
+}
+
 .center-box {
 	text-align: center;
 	p {padding: 0px 20px 0px 20px;}
@@ -120,10 +129,29 @@ i.not-starred {
 .large_em {
 		font-family: georgia;
 	margin-top: 5px;
-	font-size: 1.2em;
+	font-size: 1.4em;
+	line-height: 36px;
 	color: #646464;
 }
 
 .label, .badge {
 	font-weight: normal;
+}
+
+.colscroll {
+	overflow: scroll;
+}
+
+.scootright {
+	position: relative;
+	left: 20px;
+}
+
+.cols {
+	padding: 20px 20px 20px 20px;
+	background-color: #EDF0F2;
+}
+
+.no_margin {
+	margin-bottom: 0px;
 }

@@ -11,3 +11,9 @@ class Project < ActiveRecord::Base
   
   
 end
+
+class String
+  def initial
+    self[0,8]
+  end
+end

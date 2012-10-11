@@ -15,7 +15,6 @@ ModularVillage::Application.routes.draw do
    
   devise_for :users
 
-  resources :feedbacks
 
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
