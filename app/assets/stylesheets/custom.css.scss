@@ -105,9 +105,17 @@ i.not-starred {
 	padding: 10px 10px 10px 10px;
 	background-color: white;
 	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0px 1px 1px 1px rgba(0, 0, 0, .25);
+	-moz-box-shadow: inset 0px 1px 1px 1px rgba(0, 0, 0, .25);
   box-shadow: inset 0px 1px 1px 1px rgba(0, 0, 0, .25);
+}
+
+.whitebox {
+	-webkit-box-shadow: inset 0 0 20px #82b8c9;
+	-moz-box-shadow: inset 0 0 20px #82b8c9;
+	box-shadow: inset 0 0 20px #82b8c9;
 }
 
 .center-box {
@@ -189,4 +197,8 @@ i.not-starred {
 
 #sugg {
 	margin-bottom: 17px
+}
+
+i{
+	margin-top:10px;
 }
