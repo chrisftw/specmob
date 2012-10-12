@@ -4,30 +4,40 @@
   <div class="span12">
     <div class="row-fluid">
       <div class="span6">
+        
          <div class="navbar no_margin">
             <div class="navbar-inner">
               <ul class="nav">
-                <% @project.categories.each do |category| %>
-                  <li><a><%= category.name.initial %>..</a></li>
-                    <% end %>
+              
+                 <div class="dropdown" id="center_dropdown">
+                   <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+                   Sections
+                     <b class="caret"></b>
+                   </a>
+                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                     <% @project.categories.each do |category| %>
+                       <li><a><%= category.name %></a></li>
+                         <% end %>
+                   </ul>
+                 </div>
+  
                   </ul> 
                   </div>
                   </div>
           <div class="cols">
-            <div class="whitebox">
-              <h1><%= @project.title %></h1>
-              <p><%= @project.description.html_safe %></p>
-              <%= link_to 'Edit', edit_project_path(@project) %> 
+            
+              <div class="h1shareline"><span><%= @project.title %></span>
+            
+            <span id="editlink"><%= link_to 'Edit', edit_project_path(@project) %></span>
             </div>
-            <br/>
           
             <% @project.categories.each do |category| %>
-            <div class="whitebox">
+            <div class="whitebox selectable-requirement" data-requirement-id="<%= category.id %>">
             <h3><%= category.name %></h3>
             <p><%= category.description %></p>
             <%= link_to 'Edit', edit_category_path(category) %> 
             </div>
-            <br>
+          
             <% end %>
           
             <hr>
@@ -47,79 +57,15 @@
         <div class="navbar no_margin">
           <div class="navbar-inner">
             <ul class="nav">
-               <% @project.categories.each do |category| %>
-                <li><a><%= category.name.initial %>..</a><li>
-                  <% end %>
           </div>
         </div>
         <div class="cols">
+          <div class="h1shareline" id="sugg"><span>Suggestions</span></div>
           <div class="whitebox">
-          <h1>Comments</h1>
-           <% @project.links.each do |link| %>
-
-                <% if link.categories.present? %>
-                  <h3><%= link.categories.map(&:name).map { |t| t }.join(', ') %></h3>
-               <% end %>
-               <div class="row scootright">
-              	<div class="span1 pull-center">
-
-            			<% if current_user.present? %>
-
-              			<% if current_user.votes.where(:link_id => link.id, :up => true).present? %>
-              				<div class="voted_up">
-              				<%= link_to content_tag(:i, '', :class => "vote_up icon-chevron-up icon-large pull-center"), votes_path(:vote => {:link_id => link.id, :up => true}), :method => :post %>
-              				<%= content_tag(:h4, link.votes.where(:up => true).count - link.votes.where(:up => false).count, :class => "vote_count vote_count_up") %>
-              				<%= link_to content_tag(:i, '', :class => "vote_down icon-chevron-down icon-large pull-center"), votes_path(:vote => {:link_id => link.id, :up => false}), :method => :post %>
-              				</div>
-            		  	<% elsif current_user.votes.where(:link_id => link.id, :up => false).present? %>
-            					<div class="voted_down">
-              				<%= link_to content_tag(:i, '', :class => "vote_up icon-chevron-up icon-large pull-center"), votes_path(:vote => {:link_id => link.id, :up => true}), :method => :post %>
-              				<%= content_tag(:h4, link.votes.where(:up => true).count - link.votes.where(:up => false).count, :class => "vote_count vote_count_down") %>
-              				<%= link_to content_tag(:i, '', :class => "vote_down icon-chevron-down icon-large pull-center"), votes_path(:vote => {:link_id => link.id, :up => false}), :method => :post %>
-              				</div>
-              			<% else %>
-              				<div class="voted_nil">
-              				<%= link_to content_tag(:i, '', :class => "vote_up icon-chevron-up icon-large pull-center"), votes_path(:vote => {:link_id => link.id, :up => true}), :method => :post %>
-              				<%= content_tag(:h4, link.votes.where(:up => true).count - link.votes.where(:up => false).count, :class => "vote_count") %>
-              				<%= link_to content_tag(:i, '', :class => "vote_down icon-chevron-down icon-large pull-center"), votes_path(:vote => {:link_id => link.id, :up => false}), :method => :post %>
-              				</div>
-              			<% end %>
-            			<% else %>
-            				<div class="voted_nil">
-            				<%= link_to content_tag(:i, '', :class => "vote_up icon-chevron-up icon-large pull-center"), votes_path(:vote => {:link_id => link.id, :up => true}), :method => :post %>
-            				<%= content_tag(:h4, link.votes.where(:up => false).count - link.votes.where(:up => false).count, :class => "vote_count") %>				  
-            				<%= link_to content_tag(:i, '', :class => "vote_down icon-chevron-down icon-large pull-center"), votes_path(:vote => {:link_id => link.id, :up => false}), :method => :post %>   
-            				</div>
-            			<% end %>
-              	</div>
-             		<div class="span11 link_col">
-            			<%= link_to(link.title, link.url, target: '_blank') %>&nbsp;&nbsp;<small style="color: grey;"><em>
-
-            			<%=link.url.split('/')[2] %></em></small>
-            			<br>
-            			<small>
-            				<% if current_user.present? %>
-              			<% if current_user.stars.where(:link_id => link.id).present? %>
-              				<%= link_to content_tag(:i, '', :class => "icon-star icon-large starred"), stars_path(:star => {:link_id => link.id, :starred => true}), :method => :post, :class=> "starred" %>
-              			<% else %>
-              				<%= link_to content_tag(:i, '', :class => "icon-star icon-large not-starred"), stars_path(:star => {:link_id => link.id, :starred => true}), :method => :post, :class => "not-starred" %>
-              			<% end %>
-            			<% else %>
-              				<%= link_to content_tag(:i, '', :class => "icon-star icon-large"), stars_path(:star => {:link_id => link.id, :starred => true}), :method => :post %>
-            			<% end %>
-
-              			<%= link_to "comments (#{link.comments.count})", link %>
-            		    <%= link_to "+", votes_path(:vote => {:link_id => link.id, :up => true}), :method => :post %>
-            		    <%= link_to "-", votes_path(:vote => {:link_id => link.id, :up => false}), :method => :post %>
-            	    | Up: <%= link.votes.where(:up => true).count %>
-            			| Down: <%= link.votes.where(:up => false).count %>
-            			| Votes: <%= link.votes.where(:up => true).count - link.votes.where(:up => false).count %></small>
-            			<small><% if link.tags.present? %>
-            			<span> | Tags <%= raw link.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %><% end %></span></small> 
-             		</div>
-
-            	</div>
-            	<br>
+          
+            <% @project.categories.each do |category| %>
+              <h3><%= category.name %></h3>
+              <%= render :partial => 'suggestion', :collection => category.links %>
             <% end %>
             </div>
           <hr>
@@ -127,15 +73,10 @@
           <%= f.error_notification %>
           <%= f.input :title, :placeholder => 'Add a comment' %>
           <%= f.input :url, :placeholder => "http://..." %>
+          <%= f.input :body, :placeholder => "Additional details..." %>
           <%= f.input :tag_list, :placeholder => "add tags" %>
-          <%= hidden_field_tag "link[category_ids][]", nil %>
-          <h4>In what category should this link be posted?</h4>
-          <% Category.all.each do |category| %>
-            <%= check_box_tag "link[category_ids][]", category.id, @link.category_ids.include?(category.id), id: dom_id(category) %>
-            <%= label_tag dom_id(category), category.name %>
-          <% end %>
-
-
+          <%= hidden_field_tag "link[category_id][]", nil %>
+          <%= hidden_field_tag "category_id" %>
           <%= f.button :submit %>
           <%= f.hidden_field :project_id, :value => @project.id %>
         <% end %>

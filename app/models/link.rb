@@ -1,6 +1,6 @@
 class Link < ActiveRecord::Base
    
-   attr_accessible :title, :url, :project_id, :tag_list, :category_ids
+   attr_accessible :title, :url, :project_id, :tag_list, :category_id, :body
    
    
    belongs_to :user
@@ -10,11 +10,13 @@ class Link < ActiveRecord::Base
    has_many :stars
    has_many :taggings
    has_many :tags, through: :taggings
-   has_many :categorizations
-   has_many :categories, through: :categorizations
+   
+   belongs_to :category
+   #has_many :categorizations
+   #has_many :categories, through: :categorizations
    
    validates :title, :presence => true
-   validates :url, :presence => true
+   #validates :url, :presence => true
    validates_format_of :url, :with => URI.regexp(['http']) 
    
    def self.tagged_with(name)

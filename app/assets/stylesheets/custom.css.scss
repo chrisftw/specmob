@@ -2,9 +2,11 @@
 @import "font-awesome";
 
 body {
-  padding-top: 80px;
+  padding-top: 65px;
 }
-
+body,html{
+  height:100%;
+}
 .pull-center {
 	display: block;
 	text-align: center;
@@ -99,6 +101,7 @@ i.not-starred {
 }
 
 .whitebox {
+	margin: 10px 0px 17px 0px;
 	padding: 10px 10px 10px 10px;
 	background-color: white;
 	-webkit-border-radius: 10px;
@@ -127,10 +130,9 @@ i.not-starred {
 }
 
 .large_em {
-		font-family: georgia;
-	margin-top: 5px;
+	font-family: georgia;
 	font-size: 1.4em;
-	line-height: 36px;
+	line-height: 24px;
 	color: #646464;
 }
 
@@ -138,9 +140,6 @@ i.not-starred {
 	font-weight: normal;
 }
 
-.colscroll {
-	overflow: scroll;
-}
 
 .scootright {
 	position: relative;
@@ -148,10 +147,46 @@ i.not-starred {
 }
 
 .cols {
+	height: 800px;
+	overflow: scroll;
+	overflow-x: hidden;
+	overflow-y: visible;
 	padding: 20px 20px 20px 20px;
 	background-color: #EDF0F2;
+	border-left:1px solid lightgray;
+	border-right:1px solid lightgray;
+	border-bottom:1px solid lightgray;
 }
 
 .no_margin {
 	margin-bottom: 0px;
+}
+
+#center_dropdown {
+	margin-top: 10px;
+	a {
+		color: #555;
+		text-decoration: none;
+		text-shadow: 0 1px 0 white;
+		font-size: 1em;
+}}
+
+.indent {
+	margin-left: 10px;
+}
+
+.h1shareline {
+	margin-top: 6px;
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 30px;
+}
+
+#editlink a{
+	font-size: 13px;
+	font-weight: normal;
+}
+
+#sugg {
+	margin-bottom: 17px
 }
